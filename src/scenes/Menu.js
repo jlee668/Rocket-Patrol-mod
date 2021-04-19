@@ -9,10 +9,10 @@ class Menu extends Phaser.Scene{
         this.load.image('menubackground','./assets/menuback.png');
         this.load.image('backtile','./assets/backtile.png');
         this.load.audio('menuBackSound','./assets/menusound.mp3'); 
-        this.load.audio('sfx_ghost1', './assets/Ghost Scream In The Distance Sound.mp3');
-        this.load.audio('sfx_ghost2','./assets/Ghost Scream Sound.mp3'); 
+        this.load.audio('sfx_ghost1', './assets/507451__horroraudio__ghost-kid-sigh-less-verb.wav');
+        this.load.audio('sfx_ghost2','./assets/415355__owly-bee__impossible-how-could-i-ghostly.wav'); 
         this.load.audio('sfx_ghost3','./assets/Scary Jumpscare Sound Effect.wav'); 
-        this.load.audio('sfx_ghost4','./assets/Scary Ghost Scream Sound.mp3'); 
+        this.load.audio('sfx_ghost4','./assets/389507__adrimb86__little-girl-ghost.wav'); 
     }
 
     create() {
