@@ -13,7 +13,7 @@ class Play extends Phaser.Scene{
         //load spritesheet
         this.load.spritesheet('explosion', './assets/mist.png',{
             frameWidth: 64,
-            frameHeight: 64,
+            frameHeight: 32,
             startFrame: 0,
             endFrame: 15
         });
@@ -59,7 +59,7 @@ class Play extends Phaser.Scene{
                 end: 15,
                 first: 0
             }),
-            frameRate: 30
+            frameRate: 6
         });
         
         this.p1Score = 0;
