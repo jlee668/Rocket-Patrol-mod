@@ -5,7 +5,6 @@ Date: 4/19/21
 Work time: 6 hours 
 My point breakdown: Create a new spaceship type (w/ new artwork) that's smaller, moves faster, and is worth more points (20), 
 Create new artwork for all of the in-game assets (rocket, spaceships, explosion) (20) 
-
 */
 let config = {
     type: Phaser.CANVAS,

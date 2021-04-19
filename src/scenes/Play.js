@@ -13,9 +13,9 @@ class Play extends Phaser.Scene{
         //load spritesheet
         this.load.spritesheet('explosion', './assets/mist.png',{
             frameWidth: 64,
-            frameHeight: 32,
+            frameHeight: 64,
             startFrame: 0,
-            endFrame: 9
+            endFrame: 15
         });
     }
 
@@ -40,7 +40,7 @@ class Play extends Phaser.Scene{
         // add spaceship (x3)
         this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4,
             'target1', 0, 30).setOrigin(0, 0); 
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2,
+        this.ship02 = new Enemy1(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2,
             'target2', 0, 20).setOrigin(0, 0); 
         this.ship03 = new Enemy(this, game.config.width, borderUISize*6 + borderPadding*4,
             'target3', 0, 10).setOrigin(0, 0); 
@@ -56,7 +56,7 @@ class Play extends Phaser.Scene{
             key: 'explode',
             frames: this.anims.generateFrameNumbers('explosion', {
                 start: 0,
-                end: 9,
+                end: 15,
                 first: 0
             }),
             frameRate: 30
@@ -67,7 +67,6 @@ class Play extends Phaser.Scene{
         let scoreConfig = {
             fontFamily: 'Broadway',
             fontSize: '28px',
-            //backgroundColor: '#F3B141',
             color: '#000000',
             align: 'right', 
             padding: {
@@ -108,7 +107,7 @@ class Play extends Phaser.Scene{
         }
         if(this.checkCollision(this.p1Rocket, this.ship02)){
             this.p1Rocket.reset();
-            this.shipExplode(this.ship02);
+            this.enemy01Explode(this.ship02);
         }
         if(this.checkCollision(this.p1Rocket, this.ship01)){
             this.p1Rocket.reset();
@@ -164,6 +163,23 @@ class Play extends Phaser.Scene{
         });
         this.p1Score += ship.points;
         this.p1Score += 50;
+        this.scoreLeft.text = this.p1Score;
+        this.sound.play('sfx_explosion');
+    }
+
+    enemy01Explode(ship){
+        // temporarily hide ship
+        ship.alpha = 0;
+        // create explosion sprite
+        let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
+        boom.anims.play('explode');
+        boom.on('animationcomplete', () =>{
+            ship.reset();
+            ship.alpha = 1;
+            boom.destroy();
+        });
+        this.p1Score += ship.points;
+        this.p1Score += 25;
         this.scoreLeft.text = this.p1Score;
         this.sound.play('sfx_explosion');
     }
