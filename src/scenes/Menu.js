@@ -4,12 +4,15 @@ class Menu extends Phaser.Scene{
     }
 
     preload(){
-        this.load.audio('sfx_select', './assets/assets_blip_select12.wav');
-        this.load.audio('sfx_explosion', './assets/assets_explosion38.wav');
+        this.load.audio('sfx_select', './assets/Castle Door Sound.mp3');
         this.load.audio('sfx_kunai', './assets/Knife Throw Sound Effect.mp3');
         this.load.image('menubackground','./assets/menuback.png');
         this.load.image('backtile','./assets/backtile.png');
         this.load.audio('menuBackSound','./assets/menusound.mp3'); 
+        this.load.audio('sfx_ghost1', './assets/Ghost Scream In The Distance Sound.mp3');
+        this.load.audio('sfx_ghost2','./assets/Ghost Scream Sound.mp3'); 
+        this.load.audio('sfx_ghost3','./assets/Scary Jumpscare Sound Effect.wav'); 
+        this.load.audio('sfx_ghost4','./assets/Scary Ghost Scream Sound.mp3'); 
     }
 
     create() {
@@ -19,7 +22,7 @@ class Menu extends Phaser.Scene{
             , game.config.width, game.config.height, 'menubackground').setOrigin(0, 0);
        // menu text 
        let menuConfig = {
-        fontFamily: 'Aharoni',
+        fontFamily: 'Arial',
         fontSize: '28px',
         color: '#000000',
         align: 'right', 

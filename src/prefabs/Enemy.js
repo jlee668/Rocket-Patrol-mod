@@ -3,7 +3,7 @@ class Enemy extends Phaser.GameObjects.Sprite{
         super(scene, x, y, texture, frame);
         scene.add.existing(this); // add to existing scene
         this.points = pointValue; // store pointValue
-        this.moveSpeed = game.setting.spaceshipSpeed * 3; // pixels per frame
+        this.moveSpeed = game.setting.spaceshipSpeed + .5; // pixels per frame
     }
 
     update(){

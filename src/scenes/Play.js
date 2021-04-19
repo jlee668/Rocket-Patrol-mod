@@ -12,7 +12,7 @@ class Play extends Phaser.Scene{
         this.load.image('background','./assets/playback.png');
         //load spritesheet
         this.load.spritesheet('explosion', './assets/mist.png',{
-            frameWidth: 64,
+            frameWidth: 32,
             frameHeight: 32,
             startFrame: 0,
             endFrame: 15
@@ -63,6 +63,8 @@ class Play extends Phaser.Scene{
         });
         
         this.p1Score = 0;
+        this.currentScore;
+        this.maxScore = this.currentScore;
         // display score
         let scoreConfig = {
             fontFamily: 'Broadway',
@@ -77,11 +79,8 @@ class Play extends Phaser.Scene{
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding/100, this.p1Score,
             scoreConfig);
-
-        let count = game.setting.gameTimer/1000;
-        this.timer = this.add.text(borderUISize + borderPadding + 200, borderUISize + borderPadding/100, count,
+        this.highScore = this.add.text(borderUISize + borderPadding + 200, borderUISize + borderPadding/100, this.maxScore,
             scoreConfig);
-
         this.gameOver = false;
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
@@ -95,6 +94,14 @@ class Play extends Phaser.Scene{
 
     update(){
         // check key input for restart
+        if(this.gameOver)
+        {
+            if(this.currentScore > this.maxScore){
+                this.maxScore = this.p1Score; 
+                this.highScore.text = this.p1Score;
+            }
+        }
+
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)){
             this.scene.restart(); 
         }
@@ -150,8 +157,9 @@ class Play extends Phaser.Scene{
             boom.destroy();
         });
         this.p1Score += ship.points;
+        this.currentScore = this.p1Score;
         this.scoreLeft.text = this.p1Score;
-        this.sound.play('sfx_explosion', { volume: 0.2 });
+        this.selectSFX();
     }
 
     enemyExplode(ship){
@@ -167,8 +175,9 @@ class Play extends Phaser.Scene{
         });
         this.p1Score += ship.points;
         this.p1Score += 50;
+        this.currentScore = this.p1Score;
         this.scoreLeft.text = this.p1Score;
-        this.sound.play('sfx_explosion', { volume: 0.2 });
+        this.selectSFX();
     }
 
     enemy01Explode(ship){
@@ -184,7 +193,28 @@ class Play extends Phaser.Scene{
         });
         this.p1Score += ship.points;
         this.p1Score += 25;
+        this.currentScore = this.p1Score;
         this.scoreLeft.text = this.p1Score;
-        this.sound.play('sfx_explosion', { volume: 0.2 });
+        this.selectSFX();
+    }
+    // I use function playPop() {} on CleanPop project on nathanaltice github
+    // URL: https://github.com/nathanaltice/CleanPop/blob/master/src/main.js
+    selectSFX() {
+        switch(Math.floor(Math.random()*3)){
+            case 0:
+                this.sound.play('sfx_ghost1', { volume: 0.75 });
+                break;
+            case 1:
+                this.sound.play('sfx_ghost2', { volume: 0.75 });
+                break;
+            case 2: 
+                this.sound.play('sfx_ghost3', { volume: 0.75 });
+                break;
+            case 3:
+                this.sound.play('sfx_ghost4', { volume: 0.75 });
+                break;
+            case 4:
+                console.log('Error: Invalid Sound');
+        }
     }
 }
