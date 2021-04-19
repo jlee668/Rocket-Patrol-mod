@@ -9,7 +9,7 @@ class Play extends Phaser.Scene{
         this.load.image('target1','./assets/enemy1.png');
         this.load.image('target2','./assets/enemy2.png');
         this.load.image('target3','./assets/enemy3.png');
-        this.load.image('background','./assets/background.png');
+        this.load.image('background','./assets/playback.png');
         //load spritesheet
         this.load.spritesheet('explosion', './assets/mist.png',{
             frameWidth: 64,
@@ -151,7 +151,7 @@ class Play extends Phaser.Scene{
         });
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
-        this.sound.play('sfx_explosion');
+        this.sound.play('sfx_explosion', { volume: 0.2 });
     }
 
     enemyExplode(ship){
@@ -168,7 +168,7 @@ class Play extends Phaser.Scene{
         this.p1Score += ship.points;
         this.p1Score += 50;
         this.scoreLeft.text = this.p1Score;
-        this.sound.play('sfx_explosion');
+        this.sound.play('sfx_explosion', { volume: 0.2 });
     }
 
     enemy01Explode(ship){
@@ -185,6 +185,6 @@ class Play extends Phaser.Scene{
         this.p1Score += ship.points;
         this.p1Score += 25;
         this.scoreLeft.text = this.p1Score;
-        this.sound.play('sfx_explosion');
+        this.sound.play('sfx_explosion', { volume: 0.2 });
     }
 }

@@ -6,13 +6,17 @@ class Menu extends Phaser.Scene{
     preload(){
         this.load.audio('sfx_select', './assets/assets_blip_select12.wav');
         this.load.audio('sfx_explosion', './assets/assets_explosion38.wav');
-        this.load.audio('sfx_rocket', './assets/assets_rocket_shot.wav');
-        this.load.image('background','./assets/background.png');
+        this.load.audio('sfx_kunai', './assets/Knife Throw Sound Effect.mp3');
+        this.load.image('menubackground','./assets/menuback.png');
+        this.load.image('backtile','./assets/backtile.png');
+        this.load.audio('menuBackSound','./assets/menusound.mp3'); 
     }
 
     create() {
-        this.background = this.add.tileSprite(borderUISize-borderPadding *3, borderUISize-borderPadding *5.5
-            , game.config.width, game.config.height, 'background').setOrigin(0, 0);
+        this.sound.play('menuBackSound');
+        this.background = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'backtile').setOrigin(0, 0);
+        this.background01 = this.add.tileSprite(borderUISize-borderPadding *3, borderUISize-borderPadding *5.5
+            , game.config.width, game.config.height, 'menubackground').setOrigin(0, 0);
        // menu text 
        let menuConfig = {
         fontFamily: 'Aharoni',
@@ -36,6 +40,8 @@ class Menu extends Phaser.Scene{
     }
 
     update(){
+        this.background.tilePositionX -= starSpeed;
+
         if(Phaser.Input.Keyboard.JustDown(keyLEFT)){
             game.setting = {
                 spaceshipSpeed: 3,
