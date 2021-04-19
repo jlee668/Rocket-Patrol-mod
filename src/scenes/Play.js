@@ -1,7 +1,7 @@
 class Play extends Phaser.Scene{
     constructor(){
         super("playScene");
-    }
+    } 
 
     preload() {
         // load images
@@ -73,11 +73,15 @@ class Play extends Phaser.Scene{
                 top: 5,
                 bottom: 5,
             },
-            fixedWidth: 50
+            fixedWidth: 100
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding/100, this.p1Score,
             scoreConfig);
-        
+
+        let count = game.setting.gameTimer/1000;
+        this.timer = this.add.text(borderUISize + borderPadding + 200, borderUISize + borderPadding/100, count,
+            scoreConfig);
+
         this.gameOver = false;
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
